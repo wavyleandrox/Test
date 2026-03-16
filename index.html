@@ -316,4 +316,242 @@
             color: #9ca3af;
         }
 
-        .v
+        .video-badge {
+            font-size: 0.72rem;
+            padding: 4px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(56, 189, 248, 0.7);
+            color: #bae6fd;
+            background: rgba(8, 47, 73, 0.7);
+        }
+
+        .video-desc {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.35;
+        }
+
+        .iframe-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(30, 64, 175, 0.9);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            height: 220px;
+        }
+
+        .tool-list {
+            margin: 4px 0 0;
+            padding-left: 16px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        .tool-list li {
+            margin: 1px 0;
+        }
+
+        footer {
+            margin-top: 18px;
+            font-size: 0.78rem;
+            color: #6b7280;
+            text-align: right;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer span {
+            color: #9ca3af;
+        }
+
+        @media (max-width: 780px) {
+            body {
+                padding: 18px 10px;
+            }
+            .container {
+                padding: 18px 14px 20px;
+            }
+            .layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+            iframe {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="glow"></div>
+
+    <header>
+        <div class="title-block">
+            <h1>Mein KI‑Tagebuch</h1>
+            <p class="subtitle">
+                Notizen aus der Vorlesung: von „Warum KI jetzt?“ zu Big Data und Gartners vier Analytics‑Typen.
+            </p>
+            <div class="tag-row">
+                <span class="tag">KI / Big Data</span>
+                <span class="tag">Hochschule</span>
+                <span class="tag">Persönliche Reflexion</span>
+            </div>
+        </div>
+        <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>Deployment läuft – Seite wächst mit jeder Vorlesung</span>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="card">
+            <div class="card-header">
+                <div class="card-title">Vorlesungs‑Journal</div>
+                <div class="card-badge">Version 1 · WiSe 2025/26</div>
+            </div>
+
+            <div class="timeline">
+
+                <!-- Eintrag 1: Warum KI jetzt? -->
+                <article class="entry">
+                    <div class="entry-label-row">
+                        <span class="entry-label">Eintrag 01</span>
+                        <span class="entry-meta">Thema: „Warum KI jetzt?“</span>
+                    </div>
+                    <h2 class="entry-title">Erste Vorlesung – KI kommt im Alltag an</h2>
+                    <p class="entry-text">
+                        Heute ging es darum, warum KI gerade jetzt so präsent ist: Rechenleistung, Datenmengen
+                        und bessere Modelle treffen sich zur perfekten „Sturm“-Kombination. Spannend finde ich,
+                        dass KI nicht nur in Forschung und Industrie vorkommt, sondern plötzlich meinen Studienalltag,
+                        diese Webseite und sogar meine Lerngewohnheiten verändert.
+                    </p>
+                    <div class="entry-pill-row">
+                        <span class="entry-pill accent">Stichworte: GPU, Daten, Modelle</span>
+                        <span class="entry-pill">Frage an mich: Wo nutze ich KI schon unbewusst?</span>
+                    </div>
+                </article>
+
+                <!-- Eintrag 2: Big Data -->
+                <article class="entry">
+                    <div class="entry-label-row">
+                        <span class="entry-label">Eintrag 02</span>
+                        <span class="entry-meta">Thema: Big Data</span>
+                    </div>
+                    <h2 class="entry-title">Big Data – wenn „zu viel“ plötzlich wertvoll ist</h2>
+                    <p class="entry-text">
+                        Bei Big Data geht es nicht nur um viele Daten, sondern um Vielfalt, Geschwindigkeit und
+                        die Fähigkeit, aus diesem Chaos nutzbare Muster zu ziehen. Mir wird klar, dass Daten nur
+                        dann sinnvoll sind, wenn es Werkzeuge und Fragen gibt, mit denen ich tatsächlich Erkenntnisse
+                        und Entscheidungen ableiten kann.
+                    </p>
+                    <div class="entry-pill-row">
+                        <span class="entry-pill accent">3V / 5V‑Modelle</span>
+                        <span class="entry-pill">Verknüpfung mit KI‑Modellen</span>
+                    </div>
+                </article>
+
+                <!-- Eintrag 3: Gartner-Modell -->
+                <article class="entry">
+                    <div class="entry-label-row">
+                        <span class="entry-label">Eintrag 03</span>
+                        <span class="entry-meta">Gartner: vier Analytics‑Typen</span>
+                    </div>
+                    <h2 class="entry-title">Gartners Four Types of Analytics Capability</h2>
+                    <p class="entry-text">
+                        Besonders hilfreich fand ich das Gartner‑Modell, das Analytics in vier Stufen sortiert:
+                        vom einfachen Beschreiben der Vergangenheit bis hin zu Empfehlungen für die Zukunft.
+                        Ich versuche mir zu merken, dass jede Stufe andere Fragen beantwortet – und andere Daten
+                        und Methoden braucht.
+                    </p>
+                    <div class="entry-pill-row">
+                        <span class="entry-pill accent">Von „Was ist passiert?“ zu „Was sollen wir tun?“</span>
+                        <span class="entry-pill">Brücke zwischen Big Data und Entscheidungen</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <aside class="card">
+            <div class="card-header">
+                <div class="card-title">Analytics‑Typen im Überblick</div>
+                <div class="card-badge">Gartner‑Modell</div>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="analytics-chip descriptive">
+                    <div class="analytics-type">Typ 1</div>
+                    <div class="analytics-name">Descriptive Analytics</div>
+                    <p class="analytics-desc">
+                        Antwortet auf: „Was ist passiert?“ Typische Beispiele: Dashboards, Reports, Statistiken über
+                        abgeschlossene Zeiträume.
+                    </p>
+                    <span class="analytics-tag">Vergangenheit zusammenfassen</span>
+                </div>
+
+                <div class="analytics-chip diagnostic">
+                    <div class="analytics-type">Typ 2</div>
+                    <div class="analytics-name">Diagnostic Analytics</div>
+                    <p class="analytics-desc">
+                        Antwortet auf: „Warum ist es passiert?“ Hier wird nach Ursachen gesucht, z.B. durch Drill‑Down,
+                        Korrelationen oder Vergleich von Segmenten.
+                    </p>
+                    <span class="analytics-tag">Ursachen verstehen</span>
+                </div>
+
+                <div class="analytics-chip predictive">
+                    <div class="analytics-type">Typ 3</div>
+                    <div class="analytics-name">Predictive Analytics</div>
+                    <p class="analytics-desc">
+                        Antwortet auf: „Was wird wahrscheinlich passieren?“ Nutzt Modelle und historische Daten, um
+                        zukünftige Werte oder Ereignisse zu schätzen.
+                    </p>
+                    <span class="analytics-tag">Prognosen & Modelle</span>
+                </div>
+
+                <div class="analytics-chip prescriptive">
+                    <div class="analytics-type">Typ 4</div>
+                    <div class="analytics-name">Prescriptive Analytics</div>
+                    <p class="analytics-desc">
+                        Antwortet auf: „Was sollen wir tun?“ Liefert Handlungsempfehlungen, z.B. durch Optimierung,
+                        Szenario‑Analysen oder Simulationen.
+                    </p>
+                    <span class="analytics-tag">Handlungen ableiten</span>
+                </div>
+            </div>
+
+            <div class="video-card" style="margin-top: 12px;">
+                <div class="video-header">
+                    <div class="video-title">Mein KI‑Videolog</div>
+                    <div class="video-badge">Avatar / Screencast</div>
+                </div>
+                <p class="video-desc">
+                    Hier binde ich kurze Videos ein, in denen ich die Vorlesung in meinen eigenen Worten
+                    nacherzähle. So wird aus den Folien eine persönliche Story – und ich kann später sehen,
+                    wie sich meine Sicht auf KI verändert.
+                </p>
+                <div class="iframe-wrapper">
+                    <!-- Dein bestehendes Colossyan-Video -->
+                    <iframe src="https://app.colossyan.com/embed/b7596c3b-b96e-49fb-8e82-70db4822f852"
+                            frameborder="0"
+                            allow="autoplay; fullscreen; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+                <ul class="tool-list">
+                    <li>Idee: Pro Vorlesung ein kurzes Video (1–2 Minuten) aufnehmen.</li>
+                    <li>Dafür kannst du KI‑Video‑Tools (Avatare), Screencasts oder simple Handyaufnahmen nutzen.</li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <span>Notiz an mich:</span> Diese Seite ist ein Experiment – sowohl inhaltlich (KI & Big Data) als auch technisch (Deployment & Online‑Tools).
+    </footer>
+</div>
+</body>
+</html>

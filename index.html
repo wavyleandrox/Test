@@ -3,184 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KI Content Journal | Management & Digitalisierung</title>
+    <title>KI Hub | Management & Digitalisierung Dashboard</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --section-alt: #1e293b;
+            --bg-main: #0a0f1e; /* Tieferes Dunkelblau für Dashboard-Vibe */
+            --bg-side: #111827;
+            --bg-card: #1f2937;
             --accent-color: #38bdf8;
             --text-main: #f1f5f9;
             --text-dim: #94a3b8;
-            --border: #334155;
+            --border: rgba(56, 189, 248, 0.1);
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-main);
             color: var(--text-main);
             margin: 0;
-            line-height: 1.7;
+            display: grid;
+            grid-template-columns: 240px 1fr; /* Feste Seitennavigation */
+            min-height: 100vh;
         }
 
-        header {
-            padding: 5rem 1rem;
-            text-align: center;
-            background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+        /* --- SEITENNAVIGATION (SIDEBAR) --- */
+        nav.sidebar {
+            background-color: var(--bg-side);
+            padding: 2rem 1rem;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+        .nav-header { text-align: center; margin-bottom: 3rem; }
+        .nav-header h2 { font-size: 1.2rem; color: #fff; margin: 0; }
+        .nav-header .badge-uni { background: var(--accent-color); color: var(--bg-main); font-size: 0.7rem; padding: 0.1rem 0.6rem; border-radius: 20px; text-transform: uppercase; font-weight: bold;}
+
+        .nav-links { list-style: none; padding: 0; margin: 0; }
+        .nav-links li { margin-bottom: 0.5rem; }
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(56, 189, 248, 0.05);
+            color: #fff;
+        }
+
+        .nav-links i { margin-right: 1rem; font-size: 1.1rem; width: 20px; text-align: center;}
+
+        /* --- HAUPTBEREICH (CONTENT) --- */
+        main { padding: 3rem; }
+
+        header.dashboard-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        h1 { font-size: 2.2rem; margin: 0; letter-spacing: -1px; }
+        .dashboard-subtitle { color: var(--text-dim); font-size: 1rem; margin-top: 0.5rem; }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- VIDEO MODUL --- */
+        .video-module {
+            grid-column: 1 / -1; /* Nimmt volle Breite ein */
+            background: var(--bg-side);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
 
         .video-box {
-            margin: -3rem auto 4rem;
-            border-radius: 20px;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-            border: 1px solid var(--border);
-            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
-        section:nth-child(even) { background-color: var(--section-alt); }
+        .video-box iframe {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
 
-        .topic-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
-        .topic-icon { 
-            background: rgba(56, 189, 248, 0.1);
+        .video-text h2 { color: #fff; margin-top: 0; }
+        .video-text p { color: var(--text-dim); font-size: 0.95rem; }
+        .btn-action { background: var(--accent-color); color: var(--bg-main); border: none; padding: 0.7rem 1.5rem; border-radius: 8px; font-weight: bold; cursor: pointer;}
+
+        /* --- THEMEN SEKTIONEN --- */
+        section.topic { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+        h2.section-title { font-size: 1.8rem; margin: 0 0 1.5rem 0; }
+
+        /* Gartner Blueprint Visualisierung Platzhalter */
+        .gartner-visual-container {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            border: 1px dashed rgba(56, 189, 248, 0.3);
+            text-align: center;
             color: var(--accent-color);
-            width: 50px; height: 50px; 
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 12px; margin-right: 1.5rem; font-size: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
         }
 
-        h2 { font-size: 2rem; margin: 0; letter-spacing: -0.5px; }
-        .content-block { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: var(--accent-color);
-            color: var(--bg-color);
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
+        /* Algorithm Grid Structure */
+        .algorithm-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
         }
+
+        .algo-block { background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); }
+        .algo-block h4 { color: #fff; margin: 0 0 0.5rem 0; font-size: 1rem; text-transform: uppercase;}
+        .algo-block ul { padding-left: 1.2rem; color: var(--text-dim); }
+
+        .code-term { font-family: 'Courier New', monospace; color: var(--accent-color); background: rgba(56, 189, 248, 0.1); padding: 0.1rem 0.4rem; border-radius: 4px; }
 
         .management-insight {
-            background: rgba(255, 255, 255, 0.03);
+            grid-column: 1 / -1;
+            background: rgba(56, 189, 248, 0.03);
             border-left: 4px solid var(--accent-color);
             padding: 1.5rem;
             margin-top: 1.5rem;
             font-style: italic;
         }
 
-        footer { padding: 4rem; text-align: center; color: var(--text-dim); }
+        /* --- FUTURE-PROOFING SEKTION --- */
+        .future-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+        .future-card { background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid transparent; transition: all 0.2s ease;}
+        .future-card:hover { border-color: var(--accent-color); background: rgba(56, 189, 248, 0.05);}
+        .future-card h3 { color: #fff; font-size: 1rem; margin: 0 0 0.5rem 0; font-family: 'Courier New', monospace;}
+
+        .action-add-topic { grid-column: 1 / -1; text-align: center; padding: 2rem; background: rgba(56,189,248,0.05); border: 2px dashed rgba(56,189,248,0.3); border-radius: 12px; color: var(--accent-color); font-weight: bold; cursor: pointer;}
+
+        footer { grid-column: 2; padding: 3rem; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border); }
+    
     </style>
 </head>
 <body>
 
-<header>
-    <h1>KI | <span style="color:var(--accent-color)">Anwendungen & Methoden</span></h1>
-    <p>Content Journal • 4. Semester</p>
-</header>
+    <nav class="sidebar">
+        <div class="nav-header">
+            <span class="badge-uni">Univ. M&D</span>
+            <h2>KI HUB</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#video-spotlight" class="active"><i class="fas fa-play-circle"></i> Übersicht</a></li>
+            <li><a href="#context"><i class="fas fa-globe"></i> Kontext</a></li>
+            <li><a href="#bigdata"><i class="fas fa-server"></i> Big Data</a></li>
+            <li><a href="#gartner"><i class="fas fa-layer-group"></i> Gartner Modell</a></li>
+            <li><a href="#regression"><i class="fas fa-chart-line"></i> Regression</a></li>
+            <li><a href="#knn"><i class="fas fa-users"></i> k-NN</a></li>
+            <li><a href="#future"><i class="fas fa-rocket"></i> Zukunft</a></li>
+            <li><a href="#resources"><i class="fas fa-folder-open"></i> Ressourcen</a></li>
+        </ul>
+    </nav>
 
-<div class="video-box container">
-    <div class="video-wrapper">
-        <iframe src="https://app.colossyan.com/embed/33755afc-1fc2-4a50-986c-bf3466b7c502" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-    </div>
-</div>
+    <main>
+        <header class="dashboard-header">
+            <h1>KI | Anwendungen & Methoden</h1>
+            <p class="dashboard-subtitle">Modul-Portfolio • Content Journal • 4. Semester</p>
+        </header>
 
-<div class="main-content">
-    
-    <section>
-        <div class="container">
-            <span class="badge">Kontext</span>
-            <div class="topic-header">
-                <div class="topic-icon"><i class="fas fa-globe"></i></div>
-                <h2>Warum KI heutzutage wichtig ist</h2>
+        <section id="video-spotlight" class="video-module topic">
+            <div class="video-box">
+                <iframe src="https://app.colossyan.com/embed/33755afc-1fc2-4a50-986c-bf3466b7c502" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </div>
-            <div class="content-block">
-                <p>Künstliche Intelligenz hat die Phase der reinen Science-Fiction verlassen und ist zum zentralen <b>Wirtschaftsfaktor</b> geworden. In einer Welt, in der Daten das "neue Öl" sind, ist KI der Motor, der dieses Öl veredelt. Sie ermöglicht es Unternehmen, Muster in Massendaten zu erkennen, die für das menschliche Auge unsichtbar bleiben.</p>
-                <div class="management-insight">
-                    <b>Management-Relevanz:</b> Es geht nicht mehr nur um Effizienz, sondern um neue Geschäftsmodelle. Wer KI ignoriert, verliert den Anschluss an die automatisierte Entscheidungsfindung der Konkurrenz.
+            <div class="video-text">
+                <h2>Intro Video & Spotlight: KI-Grundlagen</h2>
+                <p>Celecsyan videos on disler sit amet, consectetur adipiscing elit, sed lir-elusmod stanisero:or methedolan functionss, video ming recoowvets cosos toc the unwrewnted modulertamus intrestoctron Colossyan antenecs...</p>
+                <button class="btn-action">Ressourcen ansehen</button>
+            </div>
+        </section>
+
+        <section id="context" class="topic">
+            <div class="container">
+                <h2 class="section-title">Kontext: Warum KI heutzutage wichtig ist</h2>
+                <div class="algo-block">
+                    <p>Künstliche Intelligenz hat die Phase der reinen Science-Fiction verlassen und ist zum zentralen <b>Wirtschaftsfaktor</b> geworden. In einer Welt, in der Daten das "neue Öl" sind, ist KI der Motor, der dieses Öl veredelt. Sie ermöglicht es Unternehmen, Muster in Massendaten zu erkennen, die für das menschliche Auge unsichtbar bleiben.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section>
-        <div class="container">
-            <span class="badge">Infrastruktur</span>
-            <div class="topic-header">
-                <div class="topic-icon"><i class="fas fa-server"></i></div>
-                <h2>Big Data: Das Fundament</h2>
-            </div>
-            <div class="content-block">
-                <p>KI benötigt Treibstoff – und dieser Treibstoff ist Big Data. Wir definieren Big Data meist über die <b>5 V's</b>: 
-                    <i>Volume</i> (enormes Datenaufkommen), <i>Velocity</i> (Echtzeit-Verarbeitung), <i>Variety</i> (Strukturierte & unstrukturierte Daten), 
-                    <i>Veracity</i> (Datenqualität) und <i>Value</i> (der geschäftliche Nutzen).</p>
-                <p>Ohne eine solide Datenstrategie bleibt jede KI-Anwendung oberflächlich. Die Herausforderung im Management liegt heute darin, Datensilos aufzubrechen.</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <span class="badge">Framework</span>
-            <div class="topic-header">
-                <div class="topic-icon"><i class="fas fa-layer-group"></i></div>
-                <h2>Gartners Four Types of Analytics</h2>
-            </div>
-            <div class="content-block">
-                <p>Dieses Modell beschreibt die Evolution der Datenanalyse. Wir unterscheiden vier Stufen, die jeweils mehr Wert generieren, aber auch höhere Komplexität bedeuten:</p>
-                <ul>
-                    <li><b>Descriptive:</b> Was ist passiert? (Rückblick/Reporting)</li>
-                    <li><b>Diagnostic:</b> Warum ist es passiert? (Ursachenforschung)</li>
-                    <li><b>Predictive:</b> Was wird passieren? (Prognosen durch ML-Modelle)</li>
-                    <li><b>Prescriptive:</b> Wie können wir es beeinflussen? (Handlungsempfehlungen)</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <span class="badge">Algorithmen I</span>
-            <div class="topic-header">
-                <div class="topic-icon"><i class="fas fa-chart-line"></i></div>
-                <h2>Regression</h2>
-            </div>
-            <div class="content-block">
-                <p>Die Regression ist das Werkzeug für quantitative Vorhersagen. Während andere Modelle oft klassifizieren, liefert die Regression <b>kontinuierliche Werte</b>. 
-                Die <i>lineare Regression</i> sucht nach einer Geraden, die den Zusammenhang zwischen Variablen (z.B. Werbeausgaben und Umsatz) am besten beschreibt.</p>
-                <p>In der Digitalisierung nutzen wir dies für Forecasts, Preisoptimierungen und Trendanalysen im Management.</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <span class="badge">Algorithmen II</span>
-            <div class="topic-header">
-                <div class="topic-icon"><i class="fas fa-users"></i></div>
-                <h2>k-Nearest Neighbors (k-NN)</h2>
-            </div>
-            <div class="content-block">
-                <p>Der k-NN Algorithmus gehört zum <b>Supervised Learning</b>. Das Prinzip ist simpel: "Zeig mir deine Freunde und ich sag dir, wer du bist." Ein unbekannter Datenpunkt wird der Klasse zugeordnet, die unter seinen nächsten Nachbarn am häufigsten vorkommt.</p>
-                <div class="management-insight">
-                    <b>Anwendung:</b> Empfehlungssysteme (Kunden, die X kauften, kauften auch Y) oder einfache Kreditrisiko-Bewertungen basierend auf ähnlichen Kundenprofilen.
+        <section id="bigdata" class="topic">
+            <div class="container">
+                <h2 class="section-title">Infrastruktur: Big Data: Das Fundament</h2>
+                <div class="algo-block">
+                    <p>KI benötigt Treibstoff – und dieser Treibstoff ist Big Data. Wir definieren Big Data meist über die <b class="code-term">5 V's</b>: <i class="code-term">Volume</i> (enormes Datenaufkommen), <i class="code-term">Velocity</i> (Echtzeit-Verarbeitung), <i class="code-term">Variety</i> (Strukturierte & unstrukturierte Daten), <i class="code-term">Veracity</i> (Datenqualität) und <i class="code-term">Value</i> (der geschäftliche Nutzen).</p>
+                    <p>Ohne eine solide Datenstrategie bleibt jede KI-Anwendung oberflächlich. Die Herausforderung im Management liegt heute darin, Datensilos aufzubrechen.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-</div>
+        <section id="gartner" class="topic">
+            <div class="container">
+                <h2 class="section-title">Framework: Gartners Four Types of Analytics Capability</h2>
+                <div class="algo-block">
+                    <p>Dieses Modell beschreibt die Evolution der Datenanalyse. Wir unterscheiden vier Stufen, die jeweils mehr Wert generieren, aber auch höhere Komplexität bedeuten:</p>
+                    <ul>
+                        <li><b>Descriptive:</b> Was ist passiert? (Rückblick/Reporting)</li>
+                        <li><b>Diagnostic:</b> Warum ist es passiert? (Ursachenforschung)</li>
+                        <li><b>Predictive:</b> Was wird passieren? (Prognosen durch ML-Modelle)</li>
+                        <li><b>Prescriptive:</b> Wie können wir es beeinflussen? (Handlungsempfehlungen)</li>
+                    </ul>
+                </div>
+                <div class="gartner-visual-container">
+                    [ GARTNER BLUEPRINT DIAGRAMM PLATZHALTER: DIFFICULTY VS. VALUE CURVE ]
+                </div>
+            </div>
+        </section>
 
-<footer>
-    <p>&copy; 2026 | Management & Digitalisierung | Modul: KI Anwendungen & Methoden</p>
-</footer>
+        <section id="regression" class="topic">
+            <div class="container">
+                <h2 class="section-title">Algorithmen I: Regression</h2>
+                <div class="algorithm-details">
+                    <div class="algo-block">
+                        <h4>Definition</h4>
+                        <p>Das statistische Rückgrat der quantitativen Vorhersage. Die Regression liefert <b class="code-term">kontinuierliche Werte</b> (Zahlen, Trends) statt Klassen.</p>
+                    </div>
+                    <div class="algo-block">
+                        <h4>Mechanismus (Vereinfacht)</h4>
+                        <ul>
+                            <li><i class="code-term">Lineare Regression</i>: Sucht die optimale Gerade durch Datenpunkte.</li>
+                            <li>Formel: <span class="code-term">Y = b0 + b1*X</span></li>
+                        </ul>
+                    </div>
+                    <div class="algo-block">
+                        <h4>Management Use-Cases</h4>
+                        <ul>
+                            <li>Umsatz-Forecasts basierend auf Marketing-Spendings.</li>
+                            <li>Preisoptimierung.</li>
+                        
+                        </ul>
+                    </div>
+                </div>
+                <div class="management-insight">
+                    <b>Management-Insight:</b> In der Digitalisierung nutzen wir dies für Forecasts, Preisoptimierungen und Trendanalysen im Management.
+                </div>
+            </div>
+        </section>
+
+        <section id="knn" class="topic">
+            <div class="container">
+                <h2 class="section-title">Algorithmen II: k-Nearest Neighbors (k-NN)</h2>
+                <div class="algorithm-details">
+                    <div class="algo-block">
+                        <h4>Definition</h4>
+                        <p>Ein intuitiver <b class="code-term">Supervised Learning</b> Algorithmus zur Klassifikation basierend auf Ähnlichkeiten.</p>
+                    </div>
+                    <div class="algo-block">
+                        <h4>Mechanismus (Vereinfacht)</h4>
+                        <ul>
+                            <li>Ordnet einen neuen Datenpunkt der Klasse zu, die bei seinen <span class="code-term">k</span> nächsten Nachbarn am häufigsten vorkommt.</li>
+                        </ul>
+                    </div>
+                    <div class="algo-block">
+                        <h4>Häufigste Use-Cases</h4>
+                        <ul>
+                            <li>Empfehlungssysteme (Kunden, die X kauften, kauften auch Y).</li>
+                            <li>Kreditrisiko-Bewertungen.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="management-insight">
+                    <b>Management-Insight:</b> Ein unbekannter Datenpunkt wird der Klasse zugeordnet, die unter seinen nächsten Nachbarn am häufigsten vorkommt.
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="topic">
+            <div class="container">
+                <h2 class="section-title">Zukunft der KI: Skalierbarkeit & Kommende Themen</h2>
+                <div class="future-grid">
+                    <div class="future-card">
+                        <h3>[NEURONALE NETZWERKE]</h3>
+                        <p>Tiefes Lernen verstehen und komplexe Daten verarbeiten...</p>
+                    </div>
+                    <div class="future-card">
+                        <h3>[DECISION TREES]</h3>
+                        <p>Komplexe Entscheidungsregeln abbilden und visualisieren...</p>
+                    </div>
+                    <div class="future-card">
+                        <h3>[CLUSTER-ANALYSE]</h3>
+                        <p>Unsupervised Customer Segments identifizieren...</p>
+                    </div>
+                    <div class="future-card">
+                        <h3>[KI-ETHIK UND RECHT]</h3>
+                        <p>Management-Verantwortung im Zeitalter der Automatisierung...</p>
+                    </div>
+                </div>
+                <div class="action-add-topic">
+                    <i class="fas fa-plus"></i> HIER NEUE THEMEN EINBAUEN
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 | Management & Digitalisierung | Modul: KI Anwendungen & Methoden</p>
+    </footer>
 
 </body>
 </html>

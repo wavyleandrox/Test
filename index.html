@@ -14,6 +14,8 @@
             --text-main: #f1f5f9;
             --text-dim: #94a3b8;
             --border: rgba(56, 189, 248, 0.1);
+            --success: #10b981;
+            --error: #ef4444;
         }
 
         * { box-sizing: border-box; }
@@ -33,12 +35,12 @@
             background-color: var(--bg-side);
             padding: 2rem 1rem;
             border-right: 1px solid var(--border);
-            height: 100vh; /* Volle Fensterhöhe */
-            position: sticky; /* HIER IST DIE MAGIE */
+            height: 100vh;
+            position: sticky;
             top: 0;
             display: flex;
             flex-direction: column;
-            overflow-y: auto; /* Falls das Menü mal sehr lang wird */
+            overflow-y: auto;
         }
 
         .nav-header { text-align: center; margin-bottom: 3rem; }
@@ -108,9 +110,48 @@
 
         .code-term { font-family: 'Fira Code', monospace; color: var(--accent-color); }
 
+        /* --- QUIZ STYLING --- */
+        .quiz-container {
+            background: var(--bg-side);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+        
+        .quiz-box {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 2rem;
+        }
+        .quiz-box:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .quiz-question { font-size: 1.2rem; font-weight: bold; margin-bottom: 1.5rem; color: #fff; }
+        .quiz-options { display: grid; gap: 1rem; }
+        .quiz-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        .quiz-btn:hover:not(:disabled) { background: rgba(56, 189, 248, 0.05); border-color: var(--accent-color); }
+        
+        .quiz-btn:disabled { cursor: not-allowed; }
+
+        /* Klassen für JS-Auswertung */
+        .quiz-btn.correct { background: rgba(16, 185, 129, 0.2) !important; border-color: var(--success) !important; color: #fff !important; }
+        .quiz-btn.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: var(--error) !important; color: #fff !important; }
+        
+        .quiz-feedback { margin-top: 1.5rem; font-weight: bold; min-height: 1.5rem; font-size: 1.05rem; }
+        .quiz-feedback.correct { color: var(--success); }
+        .quiz-feedback.wrong { color: var(--error); }
+
         footer { text-align: center; padding: 4rem; color: var(--text-dim); font-size: 0.9rem; }
 
-        /* Smooth Scroll */
         html { scroll-behavior: smooth; }
     </style>
 </head>
@@ -131,6 +172,7 @@
             <li><a href="#svm"><i class="fas fa-border-all"></i> SVM</a></li>
             <li><a href="#nn"><i class="fas fa-brain"></i> Neuronale Netze</a></li>
             <li><a href="#cnn"><i class="fas fa-eye"></i> CNN</a></li>
+            <li><a href="#quiz"><i class="fas fa-tasks"></i> KI-Quiz</a></li>
             <li><a href="#future"><i class="fas fa-rocket"></i> Zukunft</a></li>
         </ul>
     </nav>
@@ -267,6 +309,43 @@
             </div>
         </section>
 
+        <section id="quiz" class="topic">
+            <h2 class="section-title"><i class="fas fa-tasks"></i> Klausur-Check: Teste dein Wissen</h2>
+            <div class="quiz-container">
+                
+                <div class="quiz-box">
+                    <div class="quiz-question">1. Welches neuronale Netz eignet sich am besten für die automatisierte Erkennung von Defekten in einer Smart Factory (visuelle Daten)?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'B')">A) Lineare Regression</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'B')">B) Convolutional Neural Network (CNN)</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'B')">C) Support Vector Machine (SVM)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <div class="quiz-question">2. Was ist das Hauptziel einer Support Vector Machine (SVM)?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'A')">A) Eine Trennlinie (Hyperplane) mit maximalem Abstand zwischen zwei Klassen zu finden.</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'A')">B) Ein Gehirn biologisch exakt nachzubauen.</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'A')">C) Die k-nächsten Nachbarn eines Punktes zu zählen.</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <div class="quiz-question">3. Was beschreibt das "Black Box"-Problem bei tiefen neuronalen Netzen im Management?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'C')">A) Dass die Rechenzentren zu viel Strom verbrauchen.</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'C')">B) Dass Daten in unstrukturierten Formaten vorliegen.</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'C')">C) Dass Entscheidungswege der mittleren Schichten (Hidden Layers) extrem schwer nachvollziehbar sind.</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+            </div>
+        </section>
+
         <section id="future" class="topic">
             <h2 class="section-title"><i class="fas fa-rocket"></i> Ausblick</h2>
             <div class="card" style="text-align: center; border-style: dashed;">
@@ -278,6 +357,35 @@
             <p>&copy; 2026 | KI Anwendungen & Methoden | skibidi </p>
         </footer>
     </main>
+
+    <script>
+        function checkAnswer(button, isCorrect, correctLetter) {
+            // Finde die übergeordnete Quiz-Box dieser Frage
+            const quizBox = button.closest('.quiz-box');
+            const buttons = quizBox.querySelectorAll('.quiz-btn');
+            const feedback = quizBox.querySelector('.quiz-feedback');
+            
+            // Deaktiviere alle Buttons in DIESER Box nach dem Klick
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (isCorrect) {
+                button.classList.add('correct');
+                feedback.innerHTML = "🎯 Richtig gelöst! Gute Vorbereitung auf die Klausur.";
+                feedback.className = "quiz-feedback correct";
+            } else {
+                button.classList.add('wrong');
+                feedback.innerHTML = "❌ Leider falsch. Schau dir das Thema oben am besten noch einmal an.";
+                feedback.className = "quiz-feedback wrong";
+                
+                // Markiere den richtigen Button trotzdem grün
+                buttons.forEach(btn => {
+                    if (btn.innerText.startsWith(correctLetter + ")")) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+        }
+    </script>
 
 </body>
 </html>

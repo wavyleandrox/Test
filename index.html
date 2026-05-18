@@ -26,7 +26,7 @@
             color: var(--text-main);
             margin: 0;
             display: grid;
-            grid-template-columns: 260px 1fr; /* Sidebar Breite */
+            grid-template-columns: 260px 1fr;
             min-height: 100vh;
         }
 
@@ -110,6 +110,31 @@
 
         .code-term { font-family: 'Fira Code', monospace; color: var(--accent-color); }
 
+        /* --- SNAKE GAME STYLING --- */
+        .game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: var(--bg-side);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+        .game-instructions {
+            margin-bottom: 1rem;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .game-instructions b { color: var(--accent-color); }
+        canvas#snakeCanvas {
+            background: #070b14;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+            display: block;
+        }
+
         /* --- QUIZ STYLING --- */
         .quiz-container {
             background: var(--bg-side);
@@ -139,10 +164,8 @@
             transition: all 0.2s ease;
         }
         .quiz-btn:hover:not(:disabled) { background: rgba(56, 189, 248, 0.05); border-color: var(--accent-color); }
-        
         .quiz-btn:disabled { cursor: not-allowed; }
 
-        /* Klassen für JS-Auswertung */
         .quiz-btn.correct { background: rgba(16, 185, 129, 0.2) !important; border-color: var(--success) !important; color: #fff !important; }
         .quiz-btn.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: var(--error) !important; color: #fff !important; }
         
@@ -151,7 +174,6 @@
         .quiz-feedback.wrong { color: var(--error); }
 
         footer { text-align: center; padding: 4rem; color: var(--text-dim); font-size: 0.9rem; }
-
         html { scroll-behavior: smooth; }
     </style>
 </head>
@@ -172,6 +194,8 @@
             <li><a href="#svm"><i class="fas fa-border-all"></i> SVM</a></li>
             <li><a href="#nn"><i class="fas fa-brain"></i> Neuronale Netze</a></li>
             <li><a href="#cnn"><i class="fas fa-eye"></i> CNN</a></li>
+            <li><a href="#legal"><i class="fas fa-gavel"></i> Recht & Sicherheit</a></li>
+            <li><a href="#snakeSection"><i class="fas fa-gamepad"></i> KI-Pause (Snake)</a></li>
             <li><a href="#quiz"><i class="fas fa-tasks"></i> KI-Quiz</a></li>
             <li><a href="#future"><i class="fas fa-rocket"></i> Zukunft</a></li>
         </ul>
@@ -191,158 +215,120 @@
                 <h2>Die Relevanz von KI</h2>
                 <p>
                     KI ist heute weit mehr als nur ein Trend – sie ist das <b>Betriebssystem der modernen Wirtschaft</b>. 
-                    In einer digitalisierten Welt ermöglicht sie es, riesige Datenmengen in Echtzeit zu analysieren, 
-                    komplexe Prozesse zu automatisieren und personalisierte Erlebnisse zu schaffen. 
-                    Für das Management bedeutet das: Wer KI versteht und einsetzt, sichert sich den entscheidenden 
-                    Wettbewerbsvorteil durch datenbasierte Präzision.
+                    Management bedeutet heute: Wettbewerbsvorteile durch datenbasierte Präzision sichern.
                 </p>
             </div>
         </section>
 
         <section id="context" class="topic">
-            <h2 class="section-title"><i class="fas fa-globe"></i> Warum KI heute wichtig ist</h2>
-            <div class="card">
-                <p>KI transformiert Industrien, indem sie kognitive Aufgaben übernimmt. Im Studium <i>Management & Digitalisierung</i> ist dies der Hebel, um operative Exzellenz mit strategischer Innovation zu verbinden.</p>
-            </div>
-        </section>
-
-        <section id="bigdata" class="topic">
-            <h2 class="section-title"><i class="fas fa-database"></i> Big Data: Das Fundament</h2>
-            <div class="card">
-                <p>Ohne Daten gibt es keine Intelligenz. Wir fokussieren uns auf die 5 V's: <span class="code-term">Volume</span>, <span class="code-term">Velocity</span>, <span class="code-term">Variety</span>, <span class="code-term">Veracity</span> und <span class="code-term">Value</span>.</p>
-            </div>
-        </section>
-
-        <section id="gartner" class="topic">
-            <h2 class="section-title"><i class="fas fa-chart-pie"></i> Gartners Analytics Capability</h2>
+            <h2 class="section-title"><i class="fas fa-globe"></i> Kontext & Big Data</h2>
             <div class="algo-grid">
                 <div class="card">
-                    <h4>Descriptive & Diagnostic</h4>
-                    <p>Rückblickende Analyse: Was ist passiert und warum? Fokus auf Datenaufbereitung.</p>
+                    <h4>Big Data (5 V's)</h4>
+                    <p>Volume, Velocity, Variety, Veracity, Value. Das Rohmaterial jeder KI.</p>
                 </div>
                 <div class="card">
-                    <h4>Predictive & Prescriptive</h4>
-                    <p>Zukunftsorientiert: Was wird passieren und wie reagieren wir optimal darauf?</p>
+                    <h4>Gartner Modell</h4>
+                    <p>Von deskriptiver Analyse (Was war?) bis zu präskriptiver Analyse (Was sollen wir tun?).</p>
                 </div>
             </div>
         </section>
 
         <section id="regression" class="topic">
-            <h2 class="section-title"><i class="fas fa-chart-line"></i> Regression (Algorithmen I)</h2>
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> Klassische Algorithmen</h2>
             <div class="algo-grid">
                 <div class="card">
-                    <h4>Definition</h4>
-                    <p>Vorhersage kontinuierlicher Werte. Mathematische Modellierung von Zusammenhängen.</p>
+                    <h4>Regression & k-NN</h4>
+                    <p>Vorhersage von Werten (Regression) und Klassifizierung durch Ähnlichkeit (k-NN).</p>
                 </div>
                 <div class="card">
-                    <h4>Formel</h4>
-                    <p>Die Basis der linearen Regression: <br> $Y = b_0 + b_1 \cdot X + \epsilon$</p>
-                </div>
-                <div class="management-insight">
-                    <b>Management Insight:</b> Nutzen wir für Sales-Forecasts und Preis-Elastizitäts-Modelle.
-                </div>
-            </div>
-        </section>
-
-        <section id="knn" class="topic">
-            <h2 class="section-title"><i class="fas fa-users"></i> k-Nearest Neighbors (Algorithmen II)</h2>
-            <div class="algo-grid">
-                <div class="card">
-                    <h4>Klassifikation</h4>
-                    <p>Ein "Lazy Learner", der neue Datenpunkte basierend auf der Ähnlichkeit zu bestehenden Nachbarn einstuft.</p>
-                </div>
-                <div class="card">
-                    <h4>Anwendung</h4>
-                    <p>Customer Segmentation und Empfehlungs-Engines.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="svm" class="topic">
-            <h2 class="section-title"><i class="fas fa-border-all"></i> Support Vector Machines (SVM)</h2>
-            <div class="algo-grid">
-                <div class="card">
-                    <h4>Das Prinzip</h4>
-                    <p>SVMs suchen nach der optimalen Grenze (Hyperplane) zwischen Datenklassen. Das Ziel ist es, den Abstand (Margin) zwischen den Klassen zu maximieren, um eine möglichst fehlerfreie Zuordnung zu garantieren.</p>
-                </div>
-                <div class="card">
-                    <h4>Einsatzbereich</h4>
-                    <p>Perfekt für komplexe Klassifikationsprobleme, wie Spam-Filterung, Gen-Analysen oder die Kategorisierung von Texten in unübersichtlichen Datenmengen.</p>
-                </div>
-                <div class="management-insight">
-                    <b>Management Insight:</b> Extrem robust gegen "Ausreißer" in den Daten. Sie helfen Managern dabei, scharfe und verlässliche Trennlinien bei Kunden- oder Risikogruppen zu ziehen.
+                    <h4>SVM</h4>
+                    <p>Trennung von Datenklassen durch maximale Abstände (Hyperplanes).</p>
                 </div>
             </div>
         </section>
 
         <section id="nn" class="topic">
-            <h2 class="section-title"><i class="fas fa-brain"></i> Neuronale Netze</h2>
+            <h2 class="section-title"><i class="fas fa-brain"></i> Deep Learning</h2>
             <div class="algo-grid">
                 <div class="card">
-                    <h4>Die Architektur</h4>
-                    <p>Besteht aus künstlichen Neuronen, die in Schichten (Layers) organisiert sind: Eingabeschicht, verborgene Schichten (Hidden Layers) und Ausgabeschicht. Sie lernen durch die Anpassung von Gewichtungen.</p>
+                    <h4>Neuronale Netze</h4>
+                    <p>Lernen in Schichten (Hidden Layers). Komplex, aber oft eine "Black Box".</p>
                 </div>
                 <div class="card">
-                    <h4>Die Stärke</h4>
-                    <p>Sie können extrem komplexe, nicht-lineare Zusammenhänge erlernen, bei denen klassische statistische Methoden wie die einfache lineare Regression komplett versagen würden.</p>
-                </div>
-                <div class="management-insight">
-                    <b>Management Insight:</b> Das Fundament von Deep Learning. Aber Vorsicht vor dem "Black Box"-Problem: Die Rechenwege sind oft so komplex, dass Entscheidungen gegenüber Kunden oder Behörden schwer erklärbar sind.
+                    <h4>CNN</h4>
+                    <p>Spezialisiert auf visuelle Daten (Computer Vision). Scannt Bilder nach Mustern.</p>
                 </div>
             </div>
         </section>
 
-        <section id="cnn" class="topic">
-            <h2 class="section-title"><i class="fas fa-eye"></i> Convolutional Neural Networks (CNN)</h2>
+        <section id="legal" class="topic">
+            <h2 class="section-title"><i class="fas fa-gavel"></i> Recht, Sicherheit & Compliance</h2>
             <div class="algo-grid">
                 <div class="card">
-                    <h4>Spezialisierung</h4>
-                    <p>Eine Sonderform neuronaler Netze, die für visuelle Daten optimiert ist. Durch Faltungsmatrizen (Convolutions) scannt das Netz Bilder nach lokalen Mustern ab, statt das Gesamtbild auf einmal zu verarbeiten.</p>
+                    <h4>EU AI Act & Gesetze</h4>
+                    <p>Das weltweit erste umfassende KI-Gesetz. Es teilt KI in Risikoklassen ein (unannehmbar bis minimal). Compliance ist für Unternehmen Pflicht, um hohe Bußgelder zu vermeiden.</p>
                 </div>
                 <div class="card">
-                    <h4>Der Prozess</h4>
-                    <p>Das Netz lernt schrittweise: Erste Schichten erkennen Kanten, mittlere Schichten einfache Formen (Kreise, Ecken) und tiefere Schichten komplexe Objekte (Gesichter, Autos).</p>
+                    <h4>Cyberkriminalität</h4>
+                    <p>KI wird als Waffe genutzt: Automatisierte Phishing-Kampagnen und täuschend echte Deepfakes (CEO-Fraud) stellen neue Anforderungen an die IT-Security.</p>
+                </div>
+                <div class="card">
+                    <h4>Arbeitgeberrechte</h4>
+                    <p>Darf der Chef KI zur Leistungsüberwachung nutzen? Hier gilt: Datenschutz (DSGVO) und Mitbestimmung des Betriebsrats stehen über der totalen Überwachung.</p>
+                </div>
+                <div class="card">
+                    <h4>Compliance & Ethik</h4>
+                    <p>Unternehmen müssen sicherstellen, dass KI-Entscheidungen nicht diskriminieren (Bias) und ethische Leitlinien einhalten.</p>
                 </div>
                 <div class="management-insight">
-                    <b>Management Insight:</b> Unverzichtbar für die "Smart Factory" (automatisierte Qualitätskontrolle via Kamera), autonomes Fahren und medizinische Bilddiagnostik.
+                    <b>Management Insight:</b> KI-Einführung ist 20% Technik und 80% Recht & Change Management. Ohne "Privacy by Design" riskiert ihr teure Klagen.
                 </div>
+            </div>
+        </section>
+
+        <section id="snakeSection" class="topic">
+            <h2 class="section-title"><i class="fas fa-gamepad"></i> KI-Pause: Skibidi Neon Snake</h2>
+            <div class="game-wrapper">
+                <div class="game-instructions">
+                    Steuerung mit den <b>Pfeiltasten</b> • Pause/Weiter mit der <b>Leertaste</b> • Beliebige Taste nach Game Over zum Neustart.
+                </div>
+                <canvas id="snakeCanvas" width="600" height="400"></canvas>
             </div>
         </section>
 
         <section id="quiz" class="topic">
-            <h2 class="section-title"><i class="fas fa-tasks"></i> Klausur-Check: Teste dein Wissen</h2>
+            <h2 class="section-title"><i class="fas fa-tasks"></i> Klausur-Check</h2>
             <div class="quiz-container">
-                
                 <div class="quiz-box">
-                    <div class="quiz-question">1. Welches neuronale Netz eignet sich am besten für die automatisierte Erkennung von Defekten in einer Smart Factory (visuelle Daten)?</div>
+                    <div class="quiz-question">1. Welches Modell eignet sich für visuelle Objekterkennung?</div>
                     <div class="quiz-options">
-                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'B')">A) Lineare Regression</button>
-                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'B')">B) Convolutional Neural Network (CNN)</button>
-                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'B')">C) Support Vector Machine (SVM)</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'B')">A) Regression</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'B')">B) CNN</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'B')">C) k-NN</button>
                     </div>
                     <div class="quiz-feedback"></div>
                 </div>
 
                 <div class="quiz-box">
-                    <div class="quiz-question">2. Was ist das Hauptziel einer Support Vector Machine (SVM)?</div>
+                    <div class="quiz-question">2. Was ist eine Gefahr von KI in der Cyberkriminalität?</div>
                     <div class="quiz-options">
-                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'A')">A) Eine Trennlinie (Hyperplane) mit maximalem Abstand zwischen zwei Klassen zu finden.</button>
-                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'A')">B) Ein Gehirn biologisch exakt nachzubauen.</button>
-                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'A')">C) Die k-nächsten Nachbarn eines Punktes zu zählen.</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'A')">A) Automatisierte Deepfakes für Betrug</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'A')">B) Langsamere Internetverbindung</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'A')">C) Weniger Spam-Mails</button>
                     </div>
                     <div class="quiz-feedback"></div>
                 </div>
 
                 <div class="quiz-box">
-                    <div class="quiz-question">3. Was beschreibt das "Black Box"-Problem bei tiefen neuronalen Netzen im Management?</div>
+                    <div class="quiz-question">3. Was regelt der EU AI Act primär?</div>
                     <div class="quiz-options">
-                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'C')">A) Dass die Rechenzentren zu viel Strom verbrauchen.</button>
-                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'C')">B) Dass Daten in unstrukturierten Formaten vorliegen.</button>
-                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'C')">C) Dass Entscheidungswege der mittleren Schichten (Hidden Layers) extrem schwer nachvollziehbar sind.</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'C')">A) Die Höchstgeschwindigkeit von Robotern</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, false, 'C')">B) Das Verbot von allen Algorithmen</button>
+                        <button class="quiz-btn" onclick="checkAnswer(this, true, 'C')">C) Den Einsatz von KI basierend auf Risikoklassen</button>
                     </div>
                     <div class="quiz-feedback"></div>
                 </div>
-
             </div>
         </section>
 
@@ -360,32 +346,225 @@
 
     <script>
         function checkAnswer(button, isCorrect, correctLetter) {
-            // Finde die übergeordnete Quiz-Box dieser Frage
             const quizBox = button.closest('.quiz-box');
             const buttons = quizBox.querySelectorAll('.quiz-btn');
             const feedback = quizBox.querySelector('.quiz-feedback');
-            
-            // Deaktiviere alle Buttons in DIESER Box nach dem Klick
             buttons.forEach(btn => btn.disabled = true);
-            
             if (isCorrect) {
                 button.classList.add('correct');
-                feedback.innerHTML = "🎯 Richtig gelöst! Gute Vorbereitung auf die Klausur.";
+                feedback.innerHTML = "🎯 Richtig!";
                 feedback.className = "quiz-feedback correct";
             } else {
                 button.classList.add('wrong');
-                feedback.innerHTML = "❌ Leider falsch. Schau dir das Thema oben am besten noch einmal an.";
+                feedback.innerHTML = "❌ Falsch!";
                 feedback.className = "quiz-feedback wrong";
-                
-                // Markiere den richtigen Button trotzdem grün
                 buttons.forEach(btn => {
-                    if (btn.innerText.startsWith(correctLetter + ")")) {
-                        btn.classList.add('correct');
-                    }
+                    if (btn.innerText.startsWith(correctLetter + ")")) btn.classList.add('correct');
                 });
             }
         }
     </script>
 
+    <script>
+        const canvas = document.getElementById('snakeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const gridSize = 20;
+        const tileCountX = canvas.width / gridSize;
+        const tileCountY = canvas.height / gridSize;
+
+        let snake = [];
+        let apple = { x: 0, y: 0 };
+        let dx = gridSize;
+        let dy = 0;
+        let score = 0;
+        let isPaused = false;
+        let gameOver = false;
+        let gameLoopTimeout;
+        const gameSpeed = 90; 
+
+        function initGame() {
+            snake = [
+                { x: 10 * gridSize, y: 10 * gridSize },
+                { x: 9 * gridSize, y: 10 * gridSize },
+                { x: 8 * gridSize, y: 10 * gridSize }
+            ];
+            dx = gridSize;
+            dy = 0;
+            score = 0;
+            gameOver = false;
+            isPaused = false;
+            placeApple();
+            resetLoop();
+        }
+
+        function placeApple() {
+            let onSnake;
+            do {
+                onSnake = false;
+                apple.x = Math.floor(Math.random() * tileCountX) * gridSize;
+                apple.y = Math.floor(Math.random() * tileCountY) * gridSize;
+                for (let cell of snake) {
+                    if (cell.x === apple.x && cell.y === apple.y) {
+                        onSnake = true;
+                    }
+                }
+            } while (onSnake);
+        }
+
+        function gameLoop() {
+            if (gameOver || isPaused) return;
+
+            updateMechanics();
+            draw();
+
+            gameLoopTimeout = setTimeout(gameLoop, gameSpeed);
+        }
+
+        function resetLoop() {
+            clearTimeout(gameLoopTimeout);
+            gameLoop();
+        }
+
+        function updateMechanics() {
+            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+            // Wandkollision
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+                gameOver = true;
+                draw();
+                return;
+            }
+
+            // Selbstkollision
+            for (let i = 0; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    gameOver = true;
+                    draw();
+                    return;
+                }
+            }
+
+            snake.unshift(head);
+
+            // Apfel essen
+            if (head.x === apple.x && head.y === apple.y) {
+                score += 10;
+                placeApple();
+            } else {
+                snake.pop();
+            }
+        }
+
+        function draw() {
+            // Hintergrund
+            ctx.fillStyle = '#070b14';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Raster-Linien (subtil)
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.03)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < canvas.width; i += gridSize) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
+            }
+            for (let j = 0; j < canvas.height; j += gridSize) {
+                ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(canvas.width, j); ctx.stroke();
+            }
+
+            // Apfel zeichnen (Neon Rot)
+            ctx.fillStyle = '#ef4444';
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = '#ef4444';
+            ctx.fillRect(apple.x + 2, apple.y + 2, gridSize - 4, gridSize - 4);
+
+            // Schlange zeichnen (Neon Grün)
+            ctx.fillStyle = '#10b981';
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#10b981';
+            for (let i = 0; i < snake.length; i++) {
+                // Kopf optisch leicht hervorheben
+                if (i === 0) {
+                    ctx.fillStyle = '#34d399';
+                } else {
+                    ctx.fillStyle = '#10b981';
+                }
+                ctx.fillRect(snake[i].x + 1, snake[i].y + 1, gridSize - 2, gridSize - 2);
+            }
+
+            // Shadow-Effekt zurücksetzen für Text
+            ctx.shadowBlur = 0;
+
+            // Score-Anzeige oben rechts
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = "bold 16px 'Inter', sans-serif";
+            ctx.textAlign = "right";
+            ctx.fillText("SCORE: " + score, canvas.width - 20, 30);
+
+            // Status-Overlays
+            if (isPaused) {
+                ctx.fillStyle = 'rgba(7, 11, 20, 0.75)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#38bdf8';
+                ctx.font = "bold 36px 'Inter', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("PAUSE", canvas.width / 2, canvas.height / 2 + 10);
+            }
+
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(7, 11, 20, 0.85)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#ef4444';
+                ctx.font = "bold 40px 'Inter', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2 - 10);
+                
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = "16px 'Inter', sans-serif";
+                ctx.fillText("Drücke eine beliebige Taste zum Neustarten", canvas.width / 2, canvas.height / 2 + 30);
+            }
+        }
+
+        window.addEventListener('keydown', function(e) {
+            // Verhindert Standard-Scrolling bei Nutzung der Pfeiltasten und Leertaste innerhalb der App
+            if(["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+                e.preventDefault();
+            }
+
+            if (gameOver) {
+                initGame();
+                return;
+            }
+
+            if (e.code === "Space") {
+                isPaused = !isPaused;
+                if (!isPaused) {
+                    resetLoop();
+                } else {
+                    draw();
+                }
+                return;
+            }
+
+            if (isPaused) return;
+
+            switch(e.code) {
+                case "ArrowUp":
+                    if (dy === 0) { dx = 0; dy = -gridSize; }
+                    break;
+                case "ArrowDown":
+                    if (dy === 0) { dx = 0; dy = gridSize; }
+                    break;
+                case "ArrowLeft":
+                    if (dx === 0) { dx = -gridSize; dy = 0; }
+                    break;
+                case "ArrowRight":
+                    if (dx === 0) { dx = gridSize; dy = 0; }
+                    break;
+            }
+        });
+
+        // Startet das Spiel initial
+        initGame();
+    </script>
 </body>
 </html>

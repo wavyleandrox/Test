@@ -41,6 +41,7 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            z-index: 100;
         }
 
         .nav-header { text-align: center; margin-bottom: 3rem; }
@@ -64,7 +65,7 @@
         .nav-links i { margin-right: 1rem; width: 20px; text-align: center; color: var(--accent-color); }
 
         /* --- MAIN CONTENT --- */
-        main { padding: 4rem; }
+        main { padding: 4rem; min-width: 0; }
 
         .dashboard-header { margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
         h1 { font-size: 2.5rem; margin: 0; }
@@ -110,7 +111,7 @@
 
         .code-term { font-family: 'Fira Code', monospace; color: var(--accent-color); }
 
-        /* --- SNAKE GAME STYLING --- */
+        /* --- SNAKE GAME STYLING (RESPONSIVE) --- */
         .game-wrapper {
             display: flex;
             flex-direction: column;
@@ -119,6 +120,7 @@
             padding: 2rem;
             border-radius: 20px;
             border: 1px solid var(--border);
+            width: 100%;
         }
         .game-instructions {
             margin-bottom: 1rem;
@@ -127,13 +129,58 @@
             text-align: center;
         }
         .game-instructions b { color: var(--accent-color); }
+        
+        .canvas-container {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+        
         canvas#snakeCanvas {
             background: #070b14;
             border: 2px solid var(--border);
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
             display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 600 / 400;
         }
+
+        /* Virtual D-Pad for Mobile/Tablet */
+        .mobile-controls {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+            width: 100%;
+            max-width: 220px;
+            margin-top: 1.5rem;
+        }
+        .control-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 1.1rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.3rem;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .control-btn:active {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: var(--accent-color);
+        }
+        .btn-up { grid-column: 2; grid-row: 1; }
+        .btn-left { grid-column: 1; grid-row: 2; }
+        .btn-pause { grid-column: 2; grid-row: 2; font-size: 1rem; font-weight: bold; color: var(--accent-color); }
+        .btn-right { grid-column: 3; grid-row: 2; }
+        .btn-down { grid-column: 2; grid-row: 3; }
 
         /* --- QUIZ STYLING --- */
         .quiz-container {
@@ -175,28 +222,97 @@
 
         footer { text-align: center; padding: 4rem; color: var(--text-dim); font-size: 0.9rem; }
         html { scroll-behavior: smooth; }
+
+        /* --- RESPONSIVE MEDIA QUERIES FOR IPAD & PHONES --- */
+        @media (max-width: 900px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+
+            nav.sidebar {
+                height: auto;
+                position: sticky;
+                top: 0;
+                padding: 1rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                overflow-y: visible;
+            }
+
+            .nav-header {
+                margin-bottom: 0;
+                text-align: left;
+            }
+            
+            .nav-header h2 { display: inline-block; font-size: 1rem; margin-left: 0.5rem; }
+
+            .nav-links {
+                display: flex;
+                gap: 0.5rem;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 0.2rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-links li {
+                margin-bottom: 0;
+            }
+
+            .nav-links a {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .nav-links i {
+                margin-right: 0.4rem;
+            }
+
+            main {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 { font-size: 2rem; }
+
+            .video-module {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .algo-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            section.topic {
+                padding: 3rem 0;
+            }
+
+            .mobile-controls {
+                display: grid; /* Show D-Pad on touch devices/smaller viewports */
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav class="sidebar">
         <div class="nav-header">
-            <span class="badge-uni">Management & Digitalisierung</span>
+            <span class="badge-uni">M&D</span>
             <h2>KI HUB</h2>
         </div>
         <ul class="nav-links">
             <li><a href="#overview"><i class="fas fa-play-circle"></i> Übersicht</a></li>
             <li><a href="#context"><i class="fas fa-globe"></i> Kontext</a></li>
-            <li><a href="#bigdata"><i class="fas fa-database"></i> Big Data</a></li>
-            <li><a href="#gartner"><i class="fas fa-chart-pie"></i> Gartner Modell</a></li>
-            <li><a href="#regression"><i class="fas fa-chart-line"></i> Regression</a></li>
-            <li><a href="#knn"><i class="fas fa-users"></i> k-NN</a></li>
-            <li><a href="#svm"><i class="fas fa-border-all"></i> SVM</a></li>
-            <li><a href="#nn"><i class="fas fa-brain"></i> Neuronale Netze</a></li>
-            <li><a href="#cnn"><i class="fas fa-eye"></i> CNN</a></li>
-            <li><a href="#legal"><i class="fas fa-gavel"></i> Recht & Sicherheit</a></li>
-            <li><a href="#snakeSection"><i class="fas fa-gamepad"></i> KI-Pause (Snake)</a></li>
-            <li><a href="#quiz"><i class="fas fa-tasks"></i> KI-Quiz</a></li>
+            <li><a href="#regression"><i class="fas fa-chart-line"></i> Algorithmen</a></li>
+            <li><a href="#nn"><i class="fas fa-brain"></i> Deep Learning</a></li>
+            <li><a href="#legal"><i class="fas fa-gavel"></i> Recht & Security</a></li>
+            <li><a href="#snakeSection"><i class="fas fa-gamepad"></i> Snake</a></li>
+            <li><a href="#quiz"><i class="fas fa-tasks"></i> Quiz</a></li>
             <li><a href="#future"><i class="fas fa-rocket"></i> Zukunft</a></li>
         </ul>
     </nav>
@@ -291,9 +407,19 @@
             <h2 class="section-title"><i class="fas fa-gamepad"></i> KI-Pause: Skibidi Neon Snake</h2>
             <div class="game-wrapper">
                 <div class="game-instructions">
-                    Steuerung mit den <b>Pfeiltasten</b> • Pause/Weiter mit der <b>Leertaste</b> • Beliebige Taste nach Game Over zum Neustart.
+                    Tastatur: <b>Pfeiltasten</b> & <b>Leertaste</b> • Mobil/iPad: Nutze das <b>D-Pad</b> unten zum Steuern & Pausieren.
                 </div>
-                <canvas id="snakeCanvas" width="600" height="400"></canvas>
+                <div class="canvas-container">
+                    <canvas id="snakeCanvas" width="600" height="400"></canvas>
+                </div>
+                
+                <div class="mobile-controls">
+                    <button class="control-btn btn-up" onclick="handleMobileInput('up')"><i class="fas fa-arrow-up"></i></button>
+                    <button class="control-btn btn-left" onclick="handleMobileInput('left')"><i class="fas fa-arrow-left"></i></button>
+                    <button class="control-btn btn-pause" onclick="handleMobileInput('pause')"><i class="fas fa-pause"></i></button>
+                    <button class="control-btn btn-right" onclick="handleMobileInput('right')"><i class="fas fa-arrow-right"></i></button>
+                    <button class="control-btn btn-down" onclick="handleMobileInput('down')"><i class="fas fa-arrow-down"></i></button>
+                </div>
             </div>
         </section>
 
@@ -482,7 +608,6 @@
             ctx.shadowBlur = 10;
             ctx.shadowColor = '#10b981';
             for (let i = 0; i < snake.length; i++) {
-                // Kopf optisch leicht hervorheben
                 if (i === 0) {
                     ctx.fillStyle = '#34d399';
                 } else {
@@ -514,28 +639,24 @@
                 ctx.fillStyle = 'rgba(7, 11, 20, 0.85)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
                 ctx.fillStyle = '#ef4444';
-                ctx.font = "bold 40px 'Inter', sans-serif";
+                ctx.font = "bold 32px 'Inter', sans-serif";
                 ctx.textAlign = "center";
                 ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2 - 10);
                 
                 ctx.fillStyle = '#94a3b8';
-                ctx.font = "16px 'Inter', sans-serif";
-                ctx.fillText("Drücke eine beliebige Taste zum Neustarten", canvas.width / 2, canvas.height / 2 + 30);
+                ctx.font = "14px 'Inter', sans-serif";
+                ctx.fillText("Tippen / Taste drücken zum Neustarten", canvas.width / 2, canvas.height / 2 + 30);
             }
         }
 
-        window.addEventListener('keydown', function(e) {
-            // Verhindert Standard-Scrolling bei Nutzung der Pfeiltasten und Leertaste innerhalb der App
-            if(["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
-                e.preventDefault();
-            }
-
+        // Unified input logic for keyboard and mobile D-Pad
+        function handleInput(action) {
             if (gameOver) {
                 initGame();
                 return;
             }
 
-            if (e.code === "Space") {
+            if (action === "pause") {
                 isPaused = !isPaused;
                 if (!isPaused) {
                     resetLoop();
@@ -547,21 +668,49 @@
 
             if (isPaused) return;
 
-            switch(e.code) {
-                case "ArrowUp":
+            switch(action) {
+                case "up":
                     if (dy === 0) { dx = 0; dy = -gridSize; }
                     break;
-                case "ArrowDown":
+                case "down":
                     if (dy === 0) { dx = 0; dy = gridSize; }
                     break;
-                case "ArrowLeft":
+                case "left":
                     if (dx === 0) { dx = -gridSize; dy = 0; }
                     break;
-                case "ArrowRight":
+                case "right":
                     if (dx === 0) { dx = gridSize; dy = 0; }
                     break;
             }
+        }
+
+        // Interface function for HTML onclick attributes
+        function handleMobileInput(direction) {
+            handleInput(direction);
+        }
+
+        // Keyboard Listener
+        window.addEventListener('keydown', function(e) {
+            if(["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+                e.preventDefault();
+            }
+
+            switch(e.code) {
+                case "Space": handleInput("pause"); break;
+                case "ArrowUp": handleInput("up"); break;
+                case "ArrowDown": handleInput("down"); break;
+                case "ArrowLeft": handleInput("left"); break;
+                case "ArrowRight": handleInput("right"); break;
+            }
         });
+
+        // Touch Canvas to restart if game is over
+        canvas.addEventListener('touchstart', function(e) {
+            if (gameOver) {
+                e.preventDefault();
+                initGame();
+            }
+        }, { passive: false });
 
         // Startet das Spiel initial
         initGame();
